@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="static/style/base.css" type="text/css">
+		<script src="http://code.angularjs.org/1.1.5/angular.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="static/js/script.js"></script>
+        <title></title>
+    </head>
+    <body ng-app="myApp">
+		<div class="container" ng-controller="myCtrl">
+			<div class="page-title">
+				Now Playing
+				<input class="search" placeholder="Search" ng-model="searchText" />
+			</div>
+			<div class="sort-by">
+				Sort by:
+				<a href="" ng-click="predicate=''">None</a>
+				<a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a>
+				<a href="" ng-click="predicate = 'release_date'; reverse=!reverse">Release date</a>
+				<a href="" ng-click="predicate = 'vote_average'; reverse=!reverse">Vote aveage</a>
+				<a href="" ng-click="predicate = 'vote_count'; reverse=!reverse">Vote count</a>
+			<ul>
+				<li ng-animate="'animate'" ng-repeat="item in data.results | filter: {title: searchText} | orderBy:predicate:reverse">
+					<div class="left" ng-if="item.backdrop_path != null">
+						<img src="https://image.tmdb.org/t/p/w500/{{item.backdrop_path}}" />
+					</div>
+					<div class="left" ng-if="item.backdrop_path == null">
+						<img src="static/images/nonAvailable.jpg" />
+					</div>	
+					<div class="right">
+						<div class="title">{{item.title}}</div>
+						<div class="date">Release date: {{item.release_date}}</div>
+						<div class="average">Vote average: {{item.vote_average}}</div>
+						<div class="count">Vote count: {{item.vote_count}}</div>
+					</div>
+					<div class="clear"></div>
+				</li>
+			</ul>	
+		</div>
+    </body>
+</html>
