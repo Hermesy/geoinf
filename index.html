@@ -3,41 +3,51 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="static/style/base.css" type="text/css">
+		<link rel="stylesheet" href="static/bootstrap-3.3.2-dist/css/bootstrap.min.css" type="text/css">
 		<script src="http://code.angularjs.org/1.1.5/angular.js"></script>
 		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="static/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 		<script src="static/js/script.js"></script>
         <title></title>
     </head>
     <body ng-app="myApp">
 		<div class="container" ng-controller="myCtrl">
-			<div class="page-title">
-				Now Playing
-				<input class="search" placeholder="Search" ng-model="searchText" />
+			<div class="row">
+				<div class="col-xs-9">
+					<h1 class="text-center">Now Playing</h1>
+				</div>
+				<div class="col-sm-3">
+					<input class="form-control search" placeholder="Search" ng-model="searchText" />
+				</div>
 			</div>
-			<div class="sort-by">
-				Sort by:
-				<a href="" ng-click="predicate=''">None</a>
-				<a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a>
-				<a href="" ng-click="predicate = 'release_date'; reverse=!reverse">Release date</a>
-				<a href="" ng-click="predicate = 'vote_average'; reverse=!reverse">Vote aveage</a>
-				<a href="" ng-click="predicate = 'vote_count'; reverse=!reverse">Vote count</a>
-			<ul>
-				<li ng-animate="'animate'" ng-repeat="item in data.results | filter: {title: searchText} | orderBy:predicate:reverse">
-					<div class="left" ng-if="item.backdrop_path != null">
-						<img src="https://image.tmdb.org/t/p/w500/{{item.backdrop_path}}" />
-					</div>
-					<div class="left" ng-if="item.backdrop_path == null">
-						<img src="static/images/nonAvailable.jpg" />
-					</div>	
-					<div class="right">
-						<div class="title">{{item.title}}</div>
-						<div class="date">Release date: {{item.release_date}}</div>
-						<div class="average">Vote average: {{item.vote_average}}</div>
-						<div class="count">Vote count: {{item.vote_count}}</div>
-					</div>
-					<div class="clear"></div>
-				</li>
-			</ul>	
+			<div class="row sort">
+				<div class="col-sm-2">Sort by:</div>
+				<div class="col-sm-2"><a href="" ng-click="predicate=''">None</a></div>
+				<div class="col-sm-2"><a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></div>
+				<div class="col-sm-2"><a href="" ng-click="predicate = 'release_date'; reverse=!reverse">Release date</a></div>
+				<div class="col-sm-2"><a href="" ng-click="predicate = 'vote_average'; reverse=!reverse">Vote aveage</a></div>
+				<div class="col-sm-2"><a href="" ng-click="predicate = 'vote_count'; reverse=!reverse">Vote count</a></div>
+			</div>
+			<div class="row posts" ng-animate="'animate'" ng-repeat="item in data.results | filter: {title: searchText} | orderBy:predicate:reverse">
+				<div class="col-sm-6" ng-if="item.backdrop_path != null">
+					<img class="img-responsive post-image" src="https://image.tmdb.org/t/p/w500/{{item.backdrop_path}}" />
+				</div>
+				<div class="col-lg-6" ng-if="item.backdrop_path == null">
+					<img class="img-responsive post-image" src="static/images/nonAvailable.jpg" />
+				</div>	
+				<div class="col-sm-6">
+					<h2>{{item.title}}</h2>
+					<dl class="">
+						<dt>Release date</dt>
+						<dd>{{item.release_date}}</dd>
+						<dt>Vote average</dt>
+						<dd>{{item.vote_average}}</dd>
+						<dt>Vote count</dt>
+						<dd>{{item.vote_count}}</dd>	
+					</dl>						
+				</div>
+			</div>
+
 		</div>
     </body>
 </html>

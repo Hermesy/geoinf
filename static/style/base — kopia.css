@@ -3,28 +3,63 @@ body {
 	margin: 0;
 	width: 100%;
 	font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
-	background-color: #0f2432 !important;
-	color: #fff !important;
-}
-
-.search {
-	margin-top: 15px;
-	border-radius: 10px;
-	padding: 5px;
-	color: #000;
-}
-.sort div a{
+	background-color: #0f2432;
 	color: #fff;
 }
-.posts {
+.clear {
+	clear: both;
+}
+.container {
+	margin: 0 auto;
+	width: 1000px;
+	position: relative;
+}
+.container .page-title {
+	font-size: 48px;
+	text-align: center;
+}
+.container .page-title .search {
+	border-radius: 10px;
+	height: 25px;
+	padding: 5px;
+	position: absolute;
+	right: 0;
+	top: 15px;
+	width: 200px;
+}
+.container .sort-by a{
+	color: #fff;
+}
+.container ul {
+	padding: 0;
+}
+.container ul li {
 	background: none repeat scroll 0 0 rgba(15, 57, 93, 1);
 	border-radius: 10px;
 	box-shadow: 5px 5px 10px 0 #000;
+	list-style: outside none none;
 	margin-bottom: 15px;
 	padding: 15px;
 }
-.post-image{
+.container ul li .left {
+	float: left;
+}
+.container ul li .left img{
 	border-radius: 10px;
+}
+.container ul li .right {
+	float: right;
+	width: 460px;
+}
+.container ul li .right .title {
+	font-size: 33px;
+	margin-bottom: 10px;
+}
+.container ul li .right .date {
+}
+.container ul li .right .average {
+}
+.container ul li .right .count {
 }
 
 /*=====================================================================================*/
