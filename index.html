@@ -31,31 +31,48 @@
 				<div class="col-sm-2"><a href="" ng-click="predicate = 'vote_count'; reverse=!reverse">Vote count</a></div>
 			</div>
 			<div class="row posts" ng-animate="'animate'" ng-repeat="item in data.results | filter: {title: searchText} | orderBy:predicate:reverse">
-				<div class="col-sm-6" ng-if="item.backdrop_path != null">
-					<img class="img-responsive post-image" src="https://image.tmdb.org/t/p/w500/{{item.backdrop_path}}" />
+				<div class="row">
+					<div class="col-sm-6" ng-if="item.backdrop_path != null">
+						<img class="img-responsive post-image" src="https://image.tmdb.org/t/p/w500/{{item.backdrop_path}}" />
+					</div>
+					<div class="col-lg-6" ng-if="item.backdrop_path == null">
+						<img class="img-responsive post-image" src="static/images/nonAvailable.jpg" />
+					</div>	
+					<div class="col-sm-6">
+						<h2>{{item.title}}</h2>
+						<dl class="">
+							<dt>Release date</dt>
+							<dd>{{item.release_date}}</dd>
+							<dt>Vote average</dt>
+							<dd>{{item.vote_average}}</dd>
+							<dt>Vote count</dt>
+							<dd>{{item.vote_count}}</dd>	
+						</dl>
+						
+						<p class="text-right">						
+							<button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#myModal" ng-click="fillIdInModal(item.id)">
+								Add comment
+							</button>
+							<button class="btn btn-xs btn-default" type="button" data-toggle="collapse" data-target="#comments-{{item.id}}" aria-expanded="false" aria-controls="comments-{{item.id}}">
+								Show / hide comments
+							</button>						
+						</p>					
+					</div>
 				</div>
-				<div class="col-lg-6" ng-if="item.backdrop_path == null">
-					<img class="img-responsive post-image" src="static/images/nonAvailable.jpg" />
-				</div>	
-				<div class="col-sm-6">
-					<h2>{{item.title}}</h2>
-					<dl class="">
-						<dt>Release date</dt>
-						<dd>{{item.release_date}}</dd>
-						<dt>Vote average</dt>
-						<dd>{{item.vote_average}}</dd>
-						<dt>Vote count</dt>
-						<dd>{{item.vote_count}}</dd>	
-					</dl>
-					
-					<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" ng-click="fillIdInModal(item.id)">
-						Add comment
-					</button>					
-					
+			
+				<div class="collapse comments" id="comments-{{item.id}}">
+					<h3>Comments</h3>
+					<div class="row" ng-repeat="comment in comments | filter: {id: item.id}">
+						<div class="col-sm-11">
+							<dl class="dl-horizontal">
+								<dt>{{comment.author}}</dt>
+								<dd>{{comment.text}}</dd>	
+							</dl>
+						</div>
+					</div>
 				</div>
+				
 			</div>
-			
-			
 			
 			
 			
@@ -76,7 +93,7 @@
 		</div>
 		<div class="form-group">
 			<label for="text">Text</label>
-			<input type="text" class="form-control" id="text" placeholder="Text" ng-model="comment.text">
+			<textarea class="form-control" id="text" placeholder="Text" rows="3"> ng-model="comment.text"></textarea>
 		</div>
 	</form>  
       </div>

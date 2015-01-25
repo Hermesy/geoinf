@@ -33,6 +33,8 @@ angular.module('myApp', ["firebase"])
 			$scope.initialCommentModel();
 		});
 		
+		$scope.comments = myFactory.getComments();
+		
 		$scope.addComment = function() {
 			myFactory.addComment({id:$scope.comment.id, author:$scope.comment.author, text:$scope.comment.text});
 			$('#myModal').modal('hide');
