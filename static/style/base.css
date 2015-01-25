@@ -27,7 +27,8 @@ body {
 	border-radius: 10px;
 }
 
-#myModal {
+#myModal,
+#myModal2 {
 	color: #000 !important;
 }
 
