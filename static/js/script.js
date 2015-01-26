@@ -20,7 +20,7 @@ angular.module('myApp', ["firebase"])
 					$scope.auth = false;
 				} else {
 					alert("Authorization correct");
-					$('#myModal2').modal('hide');
+					//$('#myModal2').modal('hide');
 					$scope.auth = true;
 				}
 			});	
@@ -48,6 +48,12 @@ angular.module('myApp', ["firebase"])
 			$scope.comment.author = "";
 			$scope.comment.text = "";
 		};	
+		
+		$scope.initialUserModel = function() {
+			$scope.user = {};
+			$scope.user.email = "";
+			$scope.user.password = "";
+		};		
 
 		$scope.deleteComment = function(id) {
 			myFactory.deleteComment(id);
